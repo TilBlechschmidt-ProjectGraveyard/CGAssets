@@ -1,0 +1,147 @@
+$fontSize: 35px;
+
+$height: 70px;
+$trapezoidEdgeHeight: 5px;
+
+$scoreBG: rgba(255, 255, 255, 0.9);
+$scorePadding: 20px;
+$scoreWidth: 240px;
+$scoreBorderRadius: 0.3em;
+
+$clockInset: 50px;
+$clockBG: rgba(#607D8B, 0.8);
+$clockColor: black;
+$clockInDuration: 0.3s;
+
+$accentColor: #4DD0E1;
+
+.score-container {
+    padding-top: 50px;
+    height: $height;
+    line-height: $height;
+    font-size: $fontSize;
+}
+
+.trapezoid {
+    height: 5px;
+    width: 5px;
+    z-index: 2;
+}
+
+.trapezoid.right {
+    border-left: 30px solid $accentColor;
+    border-top: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
+    border-bottom: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
+    margin-right: -$height/2;
+}
+
+.trapezoid.left {
+    border-right: 30px solid $accentColor;
+    border-top: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
+    border-bottom: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
+    margin-left: -$height / 2;
+}
+
+.score {
+    background-color: $scoreBG;
+    width: $scoreWidth;
+    text-align: center;
+    box-shadow: 0 5px 2px -2px #757575;
+    z-index: 1;
+}
+
+.score:before {
+    padding-left: $scorePadding * 3;
+    padding-right: $scorePadding;
+    content: attr(data-team1);
+}
+
+.score:after {
+    padding-right: $scorePadding * 3;
+    padding-left: $scorePadding;
+    content: attr(data-team2);
+}
+
+.team {
+    background-color: $accentColor;
+    width: $height * 2;
+    text-align: center;
+    font-weight: normal;
+    font-size: $fontSize - $fontSize/7;
+}
+
+.team.left {
+    border-top-left-radius: $scoreBorderRadius;
+    border-bottom-left-radius: $scoreBorderRadius;
+}
+
+.team.right {
+    border-top-right-radius: $scoreBorderRadius;
+    border-bottom-right-radius: $scoreBorderRadius;
+}
+
+.clock {
+    z-index: 0;
+    position: absolute;
+    width: $scoreWidth - $clockInset;
+
+    text-align: center;
+    line-height: 0;
+    font-size: $clockInset/3;
+
+    // Remove styles from fieldset
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    // Make it a trapezoid
+    // border-top filled by clock-fade-in
+    border-top: 0 solid $clockBG;
+    border-left: $clockInset/2 solid transparent;
+    border-right: $clockInset/2 solid transparent;
+
+    legend {
+        width: 0;
+        height: 0;
+        padding: 0;
+        color: rgba($clockColor, 0);
+        background-color: $clockBG;
+    }
+}
+
+.clock.shown {
+    animation: clock-fade-in $clockInDuration;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+
+    legend {
+        animation: legend-fade-in 0.3s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+        animation-delay: $clockInDuration * 1.2;
+    }
+}
+
+@keyframes clock-fade-in {
+    0% {
+        border-top: 0 solid $clockBG;
+        line-height: 0;
+    }
+    100% {
+        border-top: $clockInset/2 solid $clockBG;
+        line-height: $clockInset/2;
+    }
+}
+
+@keyframes legend-fade-in {
+    0% {
+        width: 100%;
+        height: $clockInset/2;
+        color: rgba($clockColor, 0);
+    }
+    100% {
+        width: 100%;
+        height: $clockInset/2;
+        color: rgba($clockColor, 1);
+    }
+}
