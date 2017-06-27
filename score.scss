@@ -1,45 +1,10 @@
-$fontSize: 35px;
-
-$height: 70px;
-$trapezoidEdgeHeight: 5px;
-
-$scoreBG: rgba(255, 255, 255, 0.9);
-$scorePadding: 20px;
-$scoreWidth: 240px;
-$scoreBorderRadius: 0.3em;
-
-$clockInset: 50px;
-$clockBG: rgba(#607D8B, 0.8);
-$clockColor: black;
-$clockInDuration: 0.3s;
-
-$accentColor: #4DD0E1;
+@import "const";
 
 .score-container {
     padding-top: 50px;
     height: $height;
     line-height: $height;
     font-size: $fontSize;
-}
-
-.trapezoid {
-    height: 5px;
-    width: 5px;
-    z-index: 2;
-}
-
-.trapezoid.right {
-    border-left: 30px solid $accentColor;
-    border-top: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
-    border-bottom: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
-    margin-right: -$height/2;
-}
-
-.trapezoid.left {
-    border-right: 30px solid $accentColor;
-    border-top: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
-    border-bottom: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
-    margin-left: -$height / 2;
 }
 
 .score {
