@@ -1,0 +1,67 @@
+@import "const";
+
+$lineupBGColor: darken( $accentColor, 30% );
+
+body {
+    overflow: hidden;
+}
+
+.lineup-teams-container {
+    z-index: 1;
+}
+
+
+@mixin lineup-hidden-props {
+    height: 0;
+    opacity: 0;
+    margin-bottom: 40%;
+}
+
+.lineup {
+    width: 35%;
+
+    @include lineup-hidden-props;
+
+    background-color: rgba($lineupBGColor, 0.8);
+}
+
+body.hidden div.container div.lineup {
+    animation: lineup-hide;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+
+body.shown div.container div.lineup {
+    @include lineup-hidden-props();
+
+    animation: lineup-show;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes lineup-show {
+    0% { @include lineup-hidden-props(); }
+
+    100% {
+        height: 40%;
+        margin-bottom: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes lineup-hide {
+    0% {
+        height: 40%;
+        margin-bottom: 0;
+        opacity: 1;
+    }
+
+    99% {
+        height: 40%;
+        margin-bottom: 0;
+        opacity: 0;
+    }
+
+    100% { @include lineup-hidden-props(); }
+}

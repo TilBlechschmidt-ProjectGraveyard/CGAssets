@@ -1,0 +1,70 @@
+@import "const";
+
+$trapezoidWidth: 30px;
+
+.trapezoid {
+    height: 5px;
+    width: 5px;
+    z-index: 2;
+}
+
+
+// Right trapezoid
+
+//   Common props
+@mixin right-trapezoid-shown-props {
+    border-left: $trapezoidWidth solid $accentColor;
+}
+@mixin right-trapezoid-hidden-props {
+    border-left: 0 solid $accentColor;
+}
+
+//   Trapezoid object
+.trapezoid.right {
+    @include right-trapezoid-shown-props;
+    border-top: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
+    border-bottom: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
+    margin-right: -$height/2;
+}
+
+//    Animations (in/out)
+@keyframes right-trapezoid-show {
+    0% { @include right-trapezoid-hidden-props; }
+    100% { @include right-trapezoid-shown-props; }
+}
+
+@keyframes right-trapezoid-hide {
+    0% { @include right-trapezoid-shown-props; }
+    100% { @include right-trapezoid-hidden-props; }
+}
+
+
+
+// Right trapezoid
+
+//   Common props
+@mixin left-trapezoid-shown-props {
+    border-right: $trapezoidWidth solid $accentColor;
+}
+@mixin left-trapezoid-hidden-props {
+    border-right: 0 solid $accentColor;
+}
+
+//   Trapezoid object
+.trapezoid.left {
+    @include left-trapezoid-shown-props;
+    border-top: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
+    border-bottom: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
+    margin-left: -$height / 2;
+}
+
+//    Animations (in/out)
+@keyframes left-trapezoid-show {
+    0% { @include left-trapezoid-hidden-props; }
+    100% { @include left-trapezoid-shown-props; }
+}
+
+@keyframes left-trapezoid-hide {
+    0% { @include left-trapezoid-shown-props; }
+    100% { @include left-trapezoid-hidden-props; }
+}

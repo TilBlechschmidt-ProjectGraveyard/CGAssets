@@ -1,0 +1,21 @@
+$fontSize: 35px;
+
+$height: 70px;
+$trapezoidEdgeHeight: 5px;
+
+// Colors
+$textColor: #000;
+$accentColor: #4DD0E1;
+$bgColor: rgba(#607D8B, 0.8);
+
+// Score and clock related settings
+$scoreBG: rgba(255, 255, 255, 0.9);
+$scorePadding: 20px;
+$scoreWidth: 240px;
+$scoreBorderRadius: 0.3em;
+
+$clockInset: 50px;
+$clockBG: $bgColor;
+$clockColor: black;
+$clockInDuration: 0.3s;
+

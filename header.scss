@@ -1,0 +1,101 @@
+@import "const";
+@import "shapes";
+
+$headerMotionDuration: 500ms;
+$headerTextAnimationDuration: 500ms;
+
+.header {
+    line-height: $height;
+    font-size: $fontSize;
+    position: absolute;
+    z-index: 2;
+
+    top: calc(50% - #{$height} / 2);
+    transition-property: top;
+    transition-duration: $headerMotionDuration;
+}
+
+body.shown div.header {
+    top: 10%;
+}
+
+$headerTrapezoidAnimationDuration: 300ms;
+.header .trapezoid {
+    border-left: 0;
+    border-right: 0;
+}
+
+body.header-shown div.header .trapezoid.right {
+    animation: right-trapezoid-show;
+    animation-duration: $headerTrapezoidAnimationDuration;
+    animation-fill-mode: forwards;
+}
+
+body.header-shown div.header .trapezoid.left {
+    animation: left-trapezoid-show;
+    animation-duration: $headerTrapezoidAnimationDuration;
+    animation-fill-mode: forwards;
+}
+
+body.header-hidden div.header .trapezoid.right {
+    @include right-trapezoid-shown-props;
+    animation: right-trapezoid-hide;
+    animation-duration: $headerTrapezoidAnimationDuration;
+    animation-fill-mode: forwards;
+    animation-delay: $headerMotionDuration;
+}
+
+body.header-hidden div.header .trapezoid.left {
+    @include left-trapezoid-shown-props;
+    animation: left-trapezoid-hide;
+    animation-duration: $headerTrapezoidAnimationDuration;
+    animation-fill-mode: forwards;
+    animation-delay: $headerMotionDuration;
+}
+
+@mixin header-title-shown-props {
+    width: 20%;
+    color: rgba($textColor, 1);
+}
+
+@mixin header-title-hidden-props {
+    width: 0;
+    color: rgba($textColor, 0);
+}
+
+.header-title {
+    font-size: $fontSize + 5;
+    background-color: $accentColor;
+    text-align: center;
+    font-weight: normal;
+
+    overflow: hidden;
+
+    @include header-title-hidden-props;
+}
+
+body.header-hidden div.header div.header-title {
+    @include header-title-shown-props;
+    animation: header-title-fade-out;
+    animation-duration: $headerTextAnimationDuration;
+    animation-delay: $headerMotionDuration;
+    animation-fill-mode: forwards;
+}
+
+body.header-shown div.header div.header-title {
+    @include header-title-hidden-props;
+    animation: header-title-fade-in;
+    animation-duration: $headerTextAnimationDuration;
+    animation-delay: $headerTrapezoidAnimationDuration + 100ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes header-title-fade-in {
+    0% { @include header-title-hidden-props; }
+    100% { @include header-title-shown-props; }
+}
+
+@keyframes header-title-fade-out {
+    0% { @include header-title-shown-props; }
+    100% { @include header-title-hidden-props; }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Score counter</title>
+    <link rel="stylesheet" href="main.css"/>
+    <link rel="stylesheet" href="shapes.css"/>
+    <link rel="stylesheet" href="header.css"/>
+    <link rel="stylesheet" href="lineup.css"/>
+</head>
+<body class="">
+    <div class="button-panel">
+        <button onclick="play()">show</button>
+        <button onclick="invoke()">invoke</button>
+        <button onclick="next()">hide</button>
+        <div id="current-state"></div>
+    </div>
+
+    <div class="container hcenter-contents header">
+        <div class="trapezoid left"></div>
+        <div class="header-title">Volleyball</div>
+        <div class="trapezoid right"></div>
+    </div>
+
+    <div class="container hcenter-contents vcenter-contents lineup-teams-container">
+        <div class="lineup">Team 1</div>
+        vs
+        <div class="lineup">Team 2</div>
+    </div>
+
+    <script>
+        function setState() {
+            document.getElementById("current-state").innerHTML = document.body.className;
+        }
+
+        function play() {
+            document.body.className = "header-shown";
+            setState();
+        }
+
+        function invoke() {
+            document.body.className = "shown header-shown";
+            setState();
+        }
+
+        function next() {
+            document.body.className = "hidden header-hidden";
+            setState();
+        }
+
+        window.play = play;
+        window.invoke = invoke;
+        window.next = next;
+        window.update = function (a) { if (a === "invoke") invoke(); };
+    </script>
+</body>
+</html>
