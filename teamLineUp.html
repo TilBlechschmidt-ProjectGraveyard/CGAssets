@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="header.css"/>
     <link rel="stylesheet" href="lineup.css"/>
 </head>
-<body class="">
+<body class="header-shown shown">
     <div class="button-panel">
         <button onclick="play()">show</button>
         <button onclick="invoke()">invoke</button>
@@ -23,29 +23,140 @@
     </div>
 
     <div class="container hcenter-contents vcenter-contents lineup-teams-container">
-        <div class="lineup">Team 1</div>
-        vs
-        <div class="lineup">Team 2</div>
+        <div class="lineup">
+            <table style="width:100%; text-align: center" id="team1-table">
+                <tr class="shown">
+                    <th>#</th>
+                    <th>Spielername</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Hollwege, Jan Niklas</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+            </table>
+        </div>
+        <img class="lineup-vs" src="img/Versus_sign-250x200.png" />
+        <div class="lineup">
+            <table style="width:100%; text-align: center" id="team2-table">
+                <tr class="shown">
+                    <th>#</th>
+                    <th>Spielername</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Hollwege, Jan Niklas</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Schnorrbusch, Lukas</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <script>
-        function setState() {
-            document.getElementById("current-state").innerHTML = document.body.className;
-        }
-
         function play() {
             document.body.className = "header-shown";
-            setState();
         }
 
         function invoke() {
             document.body.className = "shown header-shown";
-            setState();
+
+            setTimeout(function () {
+                displayRows("team1-table");
+                displayRows("team2-table");
+            }, 900);
         }
 
         function next() {
             document.body.className = "hidden header-hidden";
-            setState();
+        }
+
+        function displayRows(id) {
+            var table = document.getElementById(id);
+            var timeout = 0;
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                timeout += 75;
+                setTimeout(function (c) {
+                    c.className = "shown";
+                }, timeout, row);
+            }
         }
 
         window.play = play;

@@ -19,3 +19,6 @@ $clockBG: $bgColor;
 $clockColor: black;
 $clockInDuration: 0.3s;
 
+// Team lineup settings
+$lineupBGColor: darken( $accentColor, 30% );
+$lineupBorderRadius: $scoreBorderRadius;

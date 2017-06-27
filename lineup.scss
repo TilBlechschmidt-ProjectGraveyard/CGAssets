@@ -1,6 +1,5 @@
 @import "const";
-
-$lineupBGColor: darken( $accentColor, 30% );
+@import "header";
 
 body {
     overflow: hidden;
@@ -10,11 +9,17 @@ body {
     z-index: 1;
 }
 
-
+$lineupHeight: 55%;
 @mixin lineup-hidden-props {
     height: 0;
     opacity: 0;
-    margin-bottom: 40%;
+    margin-bottom: $lineupHeight;
+}
+
+@mixin lineup-shown-props {
+    height: $lineupHeight;
+    margin-bottom: 0;
+    opacity: 1;
 }
 
 .lineup {
@@ -23,6 +28,46 @@ body {
     @include lineup-hidden-props;
 
     background-color: rgba($lineupBGColor, 0.8);
+    border-radius: $lineupBorderRadius;
+    padding: $lineupBorderRadius * 2;
+
+    font-size: $fontSize;
+
+    table {
+        tr {
+            border-bottom: 1px solid #157380;
+            opacity: 0;
+            transition: opacity 400ms;
+        }
+
+        tr.shown {
+            opacity: 1;
+        }
+
+        tr th {
+            padding-bottom: $height / 3;
+        }
+
+        tr:last-child td {
+            border: none;
+        }
+    }
+}
+
+.lineup-vs {
+    height: auto;
+    width: 80px;
+
+    padding: 30px;
+
+    transition: transform 200ms $headerMotionDuration;
+    transform: scale(0, 0);
+    transform-origin: center;
+}
+
+body.shown div.container .lineup-vs {
+    transition: transform 200ms 1s;
+    transform: scale(1, 1);
 }
 
 body.hidden div.container div.lineup {
@@ -32,7 +77,7 @@ body.hidden div.container div.lineup {
 }
 
 body.shown div.container div.lineup {
-    @include lineup-hidden-props();
+    @include lineup-hidden-props;
 
     animation: lineup-show;
     animation-duration: 500ms;
@@ -41,27 +86,19 @@ body.shown div.container div.lineup {
 }
 
 @keyframes lineup-show {
-    0% { @include lineup-hidden-props(); }
+    0% { @include lineup-hidden-props; }
 
-    100% {
-        height: 40%;
-        margin-bottom: 0;
-        opacity: 1;
-    }
+    100% { @include lineup-shown-props;}
 }
 
 @keyframes lineup-hide {
-    0% {
-        height: 40%;
-        margin-bottom: 0;
-        opacity: 1;
-    }
+    0% { @include lineup-shown-props; }
 
     99% {
-        height: 40%;
+        height: $lineupHeight;
         margin-bottom: 0;
         opacity: 0;
     }
 
-    100% { @include lineup-hidden-props(); }
+    100% { @include lineup-hidden-props; }
 }
