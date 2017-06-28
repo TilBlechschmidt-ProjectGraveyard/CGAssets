@@ -97,7 +97,7 @@ body.shown div.container .lineup-vs {
     transform: scale(1, 1);
 }
 
-body.hidden div.container div.lineup {
+body.hidden div.container div.lineup-wrapper {
     animation: lineup-hide;
     animation-duration: 500ms;
     animation-fill-mode: forwards;
