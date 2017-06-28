@@ -63,9 +63,8 @@ $lineupHeight: 55%;
 .lineup-title {
 
     text-align: center;
-
-
-    border-bottom: 50px solid rgba($lineupBGColor, 0.8);
+    
+    border-bottom: 50px solid rgba($bgColor, 0.8);
     border-left: $titleInset/2 solid transparent;
     border-right: $titleInset/2 solid transparent;
     height: 0;

@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="shapes.css"/>
     <link rel="stylesheet" href="score.css"/>
 </head>
-<body>
+<body onclick="hide()">
     <div class="container hcenter-contents score-container shown">
         <div class="team left">OHG</div>
         <div class="trapezoid right"></div>
         <div class="score" data-team1="0" data-team2="0" id="counter">
             :
-            <fieldset class="clock shown">
-                <legend id="timelabel">35:10</legend>
-            </fieldset>
+            <div class="clock shown">
+                <div id="timelabel" class="timelabel shown">
+                    35:10
+                </div>
+            </div>
         </div>
         <div class="trapezoid left"></div>
         <div class="team right">ABI</div>
@@ -23,6 +25,10 @@
     <script src="websocket.js"></script>
 
     <script>
+        function hide() {
+            document.body.className = "hidden";
+        }
+
         window["startTime"] = 0;
         window["pauseTime"] = 0;
 

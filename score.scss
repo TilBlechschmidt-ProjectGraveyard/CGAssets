@@ -62,38 +62,77 @@
 
     text-align: center;
     line-height: 0;
-    font-size: $clockInset/3;
+    font-size: $clockInset/2;
 
     // Remove styles from fieldset
     border: none;
     margin: 0;
     padding: 0;
 
+    color: white;
+
+    div {
+        opacity: 0;
+    }
+
     // Make it a trapezoid
     // border-top filled by clock-fade-in
     border-top: 0 solid $clockBG;
     border-left: $clockInset/2 solid transparent;
     border-right: $clockInset/2 solid transparent;
-
-    legend {
-        width: 0;
-        height: 0;
-        padding: 0;
-        color: rgba($clockColor, 0);
-        background-color: $clockBG;
-    }
 }
 
 .clock.shown {
-    animation: clock-fade-in $inDuration;
+    animation: clock-fade-in $animationDuration;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
 
     legend {
-        animation: legend-fade-in $inDuration;
+        animation: legend-fade-in $animationDuration;
         animation-timing-function: ease-out;
         animation-fill-mode: forwards;
-        //animation-delay: $inDuration * 1.2;
+    }
+}
+
+.timelabel {
+    text-align: center;
+    position: relative;
+    top: -33px;
+}
+
+.timelabel.shown {
+    animation: timelabel-fade-in $animationDuration;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes timelabel-fade-in {
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes timelabel-fade-out {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.clock.hide {
+    animation: clock-fade-out $animationDuration;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+
+    legend {
+        animation: legend-fade-out $animationDuration;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
     }
 }
 
@@ -103,26 +142,30 @@
         line-height: 0;
     }
     100% {
-        border-top: $clockInset/2 solid $clockBG;
-        line-height: $clockInset/2;
+        border-top: $clockInset/1.5 solid $clockBG;
+        line-height: $clockInset/1.5;
     }
 }
 
-@keyframes legend-fade-in {
-    75% {
-        width: 100%;
-        height: $clockInset/2;
-        color: rgba($clockColor, 0);
+@keyframes clock-fade-out {
+    0% {
+        border-top: $clockInset/1.5 solid $clockBG;
+        line-height: $clockInset/1.5;
     }
-    100% {
-        width: 100%;
-        height: $clockInset/2;
-        color: rgba($clockColor, 1);
+    50% {
+        border-top: 0 solid $clockBG;
+        line-height: 0;
     }
 }
 
 .score-container.shown {
-    animation: score-container-fade-in $inDuration;
+    animation: score-container-fade-in $animationDuration;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.score-container.hide {
+    animation: score-container-fade-out $animationDuration;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
 }
@@ -137,4 +180,34 @@
     100% {
         @include score-container-shown-props;
     }
+}
+
+@keyframes score-container-fade-out {
+    0% {
+        @include score-container-shown-props;
+    }
+    50% {
+        @include score-container-shown-props;
+    }
+    100% {
+        @include score-container-hidden-props;
+    }
+}
+
+body.hidden div.score-container {
+    animation: score-container-fade-out;
+    animation-duration: $animationDuration;
+    animation-fill-mode: forwards;
+}
+
+body.hidden div.clock {
+    animation: clock-fade-out;
+    animation-duration: $animationDuration;
+    animation-fill-mode: forwards;
+}
+
+body.hidden div.timelabel {
+    animation: timelabel-fade-out;
+    animation-duration: $animationDuration;
+    animation-fill-mode: forwards;
 }
