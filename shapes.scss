@@ -21,7 +21,7 @@ $trapezoidWidth: 30px;
 
 //   Trapezoid object
 .trapezoid.right {
-    @include right-trapezoid-shown-props;
+    //@include right-trapezoid-shown-props;
     border-top: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
     border-bottom: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
     margin-right: -$height/2;
@@ -52,7 +52,7 @@ $trapezoidWidth: 30px;
 
 //   Trapezoid object
 .trapezoid.left {
-    @include left-trapezoid-shown-props;
+    //@include left-trapezoid-shown-props;
     border-top: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
     border-bottom: $height/2 - $trapezoidEdgeHeight/2 solid transparent;
     margin-left: -$height / 2;

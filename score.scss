@@ -1,3 +1,4 @@
+@import "shapes";
 @import "const";
 
 @mixin score-container-hidden-props {
@@ -17,12 +18,54 @@
     font-size: $fontSize;
 }
 
-.score {
-    background-color: $scoreBG;
+@mixin score-hidden-props {
+    width: $trapezoidWidth * 2;
+    opacity: 0;
+    color: transparent;
+}
+
+@mixin score-shown-props {
     width: $scoreWidth;
+    opacity: 1;
+    color: #000;
+}
+
+.score {
+    @include score-hidden-props;
+
+    background-color: $scoreBG;
     text-align: center;
     box-shadow: 0 5px 2px -2px #757575;
     z-index: 1;
+}
+
+body.shown div.container div.score {
+    @include score-hidden-props;
+
+    animation: score-show;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+body.hidden div.container div.score {
+    @include score-shown-props;
+
+    animation: score-hide;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes score-show {
+    0% { @include score-hidden-props }
+    100% { @include score-shown-props }
+}
+@keyframes score-hide {
+    0% { @include score-shown-props }
+    100% { @include score-hidden-props }
 }
 
 .score:before {
@@ -37,13 +80,93 @@
     content: attr(data-team2);
 }
 
-.team {
-    background-color: $accentColor;
+.trapezoid {
+    border-left: 0;
+    border-right: 0;
+}
+
+body.shown div.container .trapezoid.right {
+    animation: right-trapezoid-show;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+body.shown div.container .trapezoid.left {
+    animation: left-trapezoid-show;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+body.hidden div.container .trapezoid.right {
+    @include right-trapezoid-shown-props;
+    animation: right-trapezoid-hide;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+body.hidden div.container .trapezoid.left {
+    @include left-trapezoid-shown-props;
+    animation: left-trapezoid-hide;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+@mixin team-shown-props {
+    opacity: 1;
     width: $height * 2;
+    color: $textColor;
+}
+@mixin team-hidden-props {
+    opacity: 0;
+    width: 0;
+    color: $accentColor;
+}
+
+.team {
+    @include team-hidden-props;
+    background-color: $accentColor;
+
     text-align: center;
     font-weight: normal;
     font-size: $fontSize - $fontSize/7;
     z-index: 10;
+}
+
+body.shown div.container div.team {
+    @include team-hidden-props;
+
+    animation: team-show;
+    animation-timing-function: linear;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+
+body.hidden div.container div.team {
+    @include team-shown-props;
+
+    animation: team-hide;
+    animation-timing-function: ease-in;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes team-show {
+    0% { @include team-hidden-props; }
+    100% { @include team-shown-props; }
+}
+
+@keyframes team-hide {
+    0% { @include team-shown-props; }
+    100% { @include team-hidden-props; }
 }
 
 .team.left {
@@ -160,39 +283,7 @@
 }
 
 .score-container.shown {
-    animation: score-container-fade-in $animationDuration;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-}
-
-.score-container.hide {
-    animation: score-container-fade-out $animationDuration;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-}
-
-@keyframes score-container-fade-in {
-    0% {
-        @include score-container-hidden-props;
-    }
-    50% {
-        @include score-container-shown-props;
-    }
-    100% {
-        @include score-container-shown-props;
-    }
-}
-
-@keyframes score-container-fade-out {
-    0% {
-        @include score-container-shown-props;
-    }
-    50% {
-        @include score-container-shown-props;
-    }
-    100% {
-        @include score-container-hidden-props;
-    }
+    @include score-container-shown-props;
 }
 
 body.hidden div.score-container {
