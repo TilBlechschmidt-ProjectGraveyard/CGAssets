@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Score counter</title>
+    <link rel="stylesheet" href="main.css"/>
+    <link rel="stylesheet" href="shapes.css"/>
+    <link rel="stylesheet" href="header.css"/>
+    <link rel="stylesheet" href="scoreList.css"/>
+</head>
+<body class="" onload="showTitle()">
+
+    <div class="container hcenter-contents header">
+        <div class="trapezoid left"></div>
+        <div class="header-title">Scores</div>
+        <div class="trapezoid right"></div>
+    </div>
+
+    <div class="container hcenter-contents vcenter-contents scoreList-container">
+        <div class="scoreList-wrapper">
+            <div class="scoreList-title">
+                <div class="scoreList-title-text">OHG</div>
+            </div>
+            <div class="scoreList-title">
+                <div class="scoreList-title-text">ABIs</div>
+            </div>
+            <div class="scoreList">
+                <table style="width:100%; text-align: center" id="table">
+                    <tr>
+                        <td>Gerätebrennball</td>
+                        <td>–</td>
+                        <td>–</td>
+                    </tr>
+                    <tr>
+                        <td>Volleyball</td>
+                        <td>–</td>
+                        <td>–</td>
+                    </tr>
+                    <tr>
+                        <td>Fußball</td>
+                        <td>–</td>
+                        <td>–</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTitle() {
+            document.body.className = "header-shown";
+            updateRows("table", "");
+
+            setTimeout(function () {
+                showTable();
+            }, 1000);
+        }
+
+        function showTable() {
+            document.body.className = "shown header-shown";
+
+            setTimeout(function () {
+                updateRows("table", "shown");
+            }, 900);
+        }
+
+        function hide() {
+            if (document.body.className.indexOf("shown") === 0) {
+                document.body.className = "hidden header-hidden";
+            } else {
+                document.body.className = "header-hidden";
+            }
+            updateRows("table", "");
+        }
+
+        function updateRows(id, newProp) {
+            var table = document.getElementById(id);
+            var timeout = 0;
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                timeout += 75;
+                setTimeout(function (c) {
+                    c.className = newProp;
+                }, timeout, row);
+            }
+        }
+
+//        window.play = play;
+//        window.invoke = invoke;
+//        window.next = next;
+//        window.update = function (a) { if (a === "invoke") invoke(); };
+    </script>
+
+    <script src="websocket.js"></script>
+</body>
+</html>

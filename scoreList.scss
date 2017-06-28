@@ -1,0 +1,125 @@
+@import "const";
+@import "header";
+
+body {
+    overflow: hidden;
+}
+
+.scoreList-container {
+    z-index: 1;
+}
+
+$scoreListHeight: 55%;
+@mixin scoreList-hidden-props {
+    height: 0;
+    opacity: 0;
+    margin-bottom: $scoreListHeight;
+}
+
+@mixin scoreList-shown-props {
+    height: $scoreListHeight;
+    margin-bottom: 0;
+    opacity: 1;
+}
+
+.scoreList-wrapper {
+    width: 50%;
+    align-items: center;
+
+    @include scoreList-hidden-props;
+}
+
+.scoreList {
+
+    background-color: rgba($lineupBGColor, 0.8);
+    border-radius: $lineupBorderRadius;
+    padding: $lineupBorderRadius * 2;
+
+    font-size: $fontSize;
+
+    position: relative;
+    top: 50px;
+
+    table {
+        color: $textColor;
+
+        tr {
+            border-bottom: 1px solid #157380;
+            opacity: 0;
+            transition: opacity 400ms;
+            height: 150px;
+
+            td {
+                width: 33%;
+                text-align: center;
+            }
+        }
+
+        tr.shown { opacity: 1; }
+        tr#table-header-team2 { opacity: 1; }
+        tr#table-header-team1 { opacity: 1; }
+
+        tr th {
+            padding-bottom: $height / 3;
+        }
+
+        tr:last-child td {
+            border: none;
+        }
+    }
+}
+
+.scoreList-title {
+
+    text-align: center;
+
+    border-bottom: 50px solid rgba($bgColor, 0.8);
+    border-left: $titleInset/2 solid transparent;
+    border-right: $titleInset/2 solid transparent;
+    height: 0;
+    width: 20%;
+
+    float: right;
+
+    position: relative;
+    right: 10px;
+}
+
+.scoreList-title-text {
+    color: white;
+    font-size: $titleInset/3;
+    padding-top: 10px;
+}
+
+body.hidden div.container div.scoreList-wrapper {
+    animation: lineup-hide;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+
+body.shown div.container div.scoreList-wrapper {
+    @include scoreList-hidden-props;
+
+    animation: scoreList-show;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes scoreList-show {
+    0% { @include scoreList-hidden-props; }
+
+    100% { @include scoreList-shown-props;}
+}
+
+@keyframes scoreList-hide {
+    0% { @include scoreList-shown-props; }
+
+    99% {
+        height: $scoreListHeight;
+        margin-bottom: 0;
+        opacity: 0;
+    }
+
+    100% { @include scoreList-hidden-props; }
+}
