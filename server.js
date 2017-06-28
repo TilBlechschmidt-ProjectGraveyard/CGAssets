@@ -14,7 +14,8 @@ wss.broadcast = function broadcast(data) {
 var variables = {
     score1: 0,
     score2: 0,
-    startTime: 0
+    startTime: 0,
+    pauseTime: 0
 };
 
 wss.on('connection', function connection(ws) {

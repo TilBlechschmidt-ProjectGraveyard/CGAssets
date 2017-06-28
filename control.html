@@ -5,6 +5,8 @@
     <title>CONTROL IT ALL</title>
 </head>
 <body>
+    
+    <script src="websocket.js"></script>
     <div>
         <h1>Score counter</h1>
         <button onclick="goto('/scoreCounter.html')">Show counter</button>
@@ -23,7 +25,9 @@
         <br>
         <br>
 
-        <button onclick="set('startTime', Date.now())">Reset timer</button>
+        <button onclick="set('startTime', Date.now());set('pauseTime', 0);">Reset timer</button>
+        <button onclick="set('pauseTime', Date.now());">Pause timer</button>
+        <button onclick="resumeClock();">Resume timer</button>
 
         <br>
         <button onclick="func('hide')">Hide</button>
@@ -78,6 +82,17 @@
         ws.onclose = function () {
             window.location = window.location;
         };
+    
+    
+        function resumeClock() {
+            var start = variables["startTime"];
+            var pause = variables["pauseTime"];
+            var now = Date.now()
+            
+            var newStartTime = start + (now - pause)
+            set('startTime', newStartTime)
+            set('pauseTime', 0);
+        }
 
         function send(data) {
             ws.send(JSON.stringify(data))

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Score counter</title>
     <link rel="stylesheet" href="main.css"/>
-    <link rel="stylesheet" href="shapes.css"/>
     <link rel="stylesheet" href="score.css"/>
+    <link rel="stylesheet" href="shapes.css"/>
 </head>
-<body onclick="hide()">
+<body>
     <div class="container hcenter-contents score-container shown">
         <div class="team left">OHG</div>
         <div class="trapezoid right"></div>
@@ -49,8 +49,8 @@
         };
 
         function getDeltaTimeAsString() {
-            var start = window["startTime"];
-            var pause = window["pauseTime"];
+            var start = variables["startTime"];
+            var pause = variables["pauseTime"];
 
             if (start === 0) {
                 return "00:00"
