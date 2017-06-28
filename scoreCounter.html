@@ -23,9 +23,6 @@
     <script src="websocket.js"></script>
 
     <script>
-        window["startTime"] = 0;
-        window["pauseTime"] = 0;
-
         Date.prototype.getFullMinutes = function() {
             if (this.getMinutes() < 10) {
                 return '0'  + this.getMinutes();
@@ -43,8 +40,8 @@
         };
 
         function getDeltaTimeAsString() {
-            var start = window["startTime"];
-            var pause = window["pauseTime"];
+            var start = variables["startTime"];
+            var pause = variables["pauseTime"];
 
             if (start === 0) {
                 return "00:00"
