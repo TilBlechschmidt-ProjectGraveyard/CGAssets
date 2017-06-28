@@ -13,5 +13,5 @@ ws.onmessage = function (data) {
 };
 
 ws.onclose = function () {
-    window.location = window.location;
+    //window.location = window.location;
 };

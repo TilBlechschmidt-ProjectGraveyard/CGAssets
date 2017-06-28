@@ -22,10 +22,14 @@ $lineupHeight: 55%;
     opacity: 1;
 }
 
-.lineup {
+.lineup-wrapper {
     width: 35%;
+    align-items: center;
 
     @include lineup-hidden-props;
+}
+
+.lineup {
 
     background-color: rgba($lineupBGColor, 0.8);
     border-radius: $lineupBorderRadius;
@@ -56,6 +60,27 @@ $lineupHeight: 55%;
     }
 }
 
+.lineup-title {
+
+    text-align: center;
+
+
+    border-bottom: 50px solid rgba($lineupBGColor, 0.8);
+    border-left: $titleInset/2 solid transparent;
+    border-right: $titleInset/2 solid transparent;
+    height: 0;
+    width: 25%;
+
+
+    position: relative;
+}
+
+.lineup-title-text {
+    color: white;
+    font-size: $titleInset/3;
+    padding-top: 10px;
+}
+
 .lineup-vs {
     height: auto;
     width: 80px;
@@ -78,7 +103,7 @@ body.hidden div.container div.lineup {
     animation-fill-mode: forwards;
 }
 
-body.shown div.container div.lineup {
+body.shown div.container div.lineup-wrapper {
     @include lineup-hidden-props;
 
     animation: lineup-show;
