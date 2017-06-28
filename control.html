@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>CONTROL IT ALL</title>
 </head>
-<body>
-    
+<body style="display: flex;">
+
     <script src="websocket.js"></script>
     <div>
         <h1>Score counter</h1>
@@ -25,9 +25,15 @@
         <br>
         <br>
 
-        <button onclick="set('startTime', Date.now());set('pauseTime', 0);">Reset timer</button>
+        <button onclick="set('startTime', 0); set('pauseTime', 0);">Reset timer</button>
+        <button onclick="set('startTime', Date.now());set('pauseTime', 0);">Restart timer</button>
         <button onclick="set('pauseTime', Date.now());">Pause timer</button>
         <button onclick="resumeClock();">Resume timer</button>
+
+        <br>
+
+        <input placeholder="min" id="min" /> :  <input placeholder="sec" id="sec" />
+        <button onclick="setClockValue()">set</button>
 
         <br>
         <button onclick="func('hide')">Hide</button>
@@ -56,10 +62,11 @@
     <style>
         html, body {
             height: 100%;
+            overflow: hidden;
         }
 
         body div {
-            width: 32%;
+            width: 33.33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333%;
             height: 100%;
             display: inline-block;
             border-left: solid black;
@@ -82,15 +89,22 @@
         ws.onclose = function () {
             window.location = window.location;
         };
-    
-    
+
+        function setClockValue() {
+            var minutes = parseInt(document.getElementById('min').value);
+            var seconds = parseInt(document.getElementById('sec').value);
+
+            set('startTime', Date.now() - 1000*seconds - 60000*minutes);
+            set('pauseTime', Date.now());
+        }
+
         function resumeClock() {
             var start = variables["startTime"];
             var pause = variables["pauseTime"];
-            var now = Date.now()
-            
-            var newStartTime = start + (now - pause)
-            set('startTime', newStartTime)
+            var now = Date.now();
+
+            var newStartTime = start + (now - pause);
+            set('startTime', newStartTime);
             set('pauseTime', 0);
         }
 
@@ -103,19 +117,19 @@
         }
 
         function func(funcname) {
-            send({ type: "func", name: funcname})
+            send({ type: "func", name: funcname});
         }
 
         function inc(varname) {
-            send({ type: "var", "opp": "inc", name: varname})
+            send({ type: "var", "opp": "inc", name: varname});
         }
 
         function dec(varname) {
-            send({ type: "var", "opp": "dec", name: varname})
+            send({ type: "var", "opp": "dec", name: varname});
         }
 
         function set(varname, value) {
-            send({ type: "var", "opp": "set", name: varname, value: value})
+            send({ type: "var", "opp": "set", name: varname, value: value});
         }
     </script>
 </body>
