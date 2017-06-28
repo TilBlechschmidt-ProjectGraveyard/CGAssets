@@ -16,8 +16,8 @@ ws.onmessage = function (data) {
     console.log(data);
     if (typeof data === 'string') {
         data = JSON.parse(data);
-        
-        
+
+
 
         if (!isController && data.type === "goto") {
             if (!hidden && typeof window["hide"] === "function") {
@@ -29,7 +29,7 @@ ws.onmessage = function (data) {
                 window.location = data.target;
             }
             // window.location = data.target;
-        } else if (isController && data.type === "func") {
+        } else if (!isController && data.type === "func") {
             if (typeof window[data.name] === "function") {
                 window[data.name]();
 
@@ -37,7 +37,7 @@ ws.onmessage = function (data) {
             }
         } else if (data.type === "var") {
             variables[data.name] = data.value
-            
+
             if (data.name === "score1") {
                 document.getElementById("counter").setAttribute("data-team1", data.value)
             } else if (data.name === "score2") {
