@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CONTROL IT ALL</title>
+</head>
+<body>
+    <div>
+        <h1>Score</h1>
+    </div>
+    <div>
+        <h1>Lineup</h1>
+        <button onclick="goto('/teamLineUp-volleyball.html')">Volleyball</button>
+        <button onclick="goto('/teamLineUp-fussball.html')">Fußball</button>
+        <button onclick="goto('/teamLineUp.html')">Brennball (or nothing for that manner)</button>
+    </div>
+    <div>
+        <h1>Score overview</h1>
+    </div>
+
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body div {
+            width: 32%;
+            height: 100%;
+            display: inline-block;
+            border-left: solid black;
+            border-right: solid black;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        var ws = new WebSocket("ws://" + window.location.hostname + ":8080");
+        ws.onopen = function () {
+            console.warn("IT WORKED!!! HORRAAAAAAYYYYYYYYYY!!");
+        };
+
+        ws.onclose = function () {
+            window.location = window.location;
+        };
+
+        function goto(someRandomLocation) {
+            ws.send(JSON.stringify({ type: "goto", target: someRandomLocation}));
+        }
+    </script>
+</body>
+</html>

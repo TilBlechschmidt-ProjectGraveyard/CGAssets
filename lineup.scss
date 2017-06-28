@@ -34,15 +34,17 @@ $lineupHeight: 55%;
     font-size: $fontSize;
 
     table {
+        color: $textColor;
+
         tr {
             border-bottom: 1px solid #157380;
             opacity: 0;
             transition: opacity 400ms;
         }
 
-        tr.shown {
-            opacity: 1;
-        }
+        tr.shown { opacity: 1; }
+        tr#table-header-team2 { opacity: 1; }
+        tr#table-header-team1 { opacity: 1; }
 
         tr th {
             padding-bottom: $height / 3;

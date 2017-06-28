@@ -64,7 +64,7 @@ body.header-hidden div.header .trapezoid.left {
 }
 
 .header-title {
-    font-size: $fontSize + 5;
+    font-size: $fontSize * 1.25;
     background-color: $accentColor;
     text-align: center;
     font-weight: normal;

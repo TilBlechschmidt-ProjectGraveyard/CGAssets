@@ -1,7 +1,7 @@
 .score-container {
   padding-top: 50px;
-  height: 70px;
-  line-height: 70px;
+  height: 87.5px;
+  line-height: 87.5px;
   font-size: 35px; }
 
 .score {
@@ -23,7 +23,7 @@
 
 .team {
   background-color: #4DD0E1;
-  width: 140px;
+  width: 175px;
   text-align: center;
   font-weight: normal;
   font-size: 30px; }

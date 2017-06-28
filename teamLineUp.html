@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="header.css"/>
     <link rel="stylesheet" href="lineup.css"/>
 </head>
-<body class="header-shown shown">
+<body class="shown header-shown">
     <div class="button-panel">
         <button onclick="play()">show</button>
         <button onclick="invoke()">invoke</button>
@@ -25,10 +25,6 @@
     <div class="container hcenter-contents vcenter-contents lineup-teams-container">
         <div class="lineup">
             <table style="width:100%; text-align: center" id="team1-table">
-                <tr class="shown">
-                    <th>#</th>
-                    <th>Spielername</th>
-                </tr>
                 <tr>
                     <td>1</td>
                     <td>Hollwege, Jan Niklas</td>
@@ -78,10 +74,6 @@
         <img class="lineup-vs" src="img/Versus_sign-250x200.png" />
         <div class="lineup">
             <table style="width:100%; text-align: center" id="team2-table">
-                <tr class="shown">
-                    <th>#</th>
-                    <th>Spielername</th>
-                </tr>
                 <tr>
                     <td>1</td>
                     <td>Hollwege, Jan Niklas</td>
@@ -139,30 +131,34 @@
             document.body.className = "shown header-shown";
 
             setTimeout(function () {
-                displayRows("team1-table");
-                displayRows("team2-table");
+                updateRows("team1-table", "shown");
+                updateRows("team2-table", "shown");
             }, 900);
         }
 
         function next() {
             document.body.className = "hidden header-hidden";
+            updateRows("team1-table", "");
+            updateRows("team2-table", "");
         }
 
-        function displayRows(id) {
+        function updateRows(id, newProp) {
             var table = document.getElementById(id);
             var timeout = 0;
             for (var i = 0, row; row = table.rows[i]; i++) {
                 timeout += 75;
                 setTimeout(function (c) {
-                    c.className = "shown";
+                    c.className = newProp;
                 }, timeout, row);
             }
         }
 
-        window.play = play;
-        window.invoke = invoke;
-        window.next = next;
-        window.update = function (a) { if (a === "invoke") invoke(); };
+//        window.play = play;
+//        window.invoke = invoke;
+//        window.next = next;
+//        window.update = function (a) { if (a === "invoke") invoke(); };
     </script>
+
+    <script src="websocket.js"></script>
 </body>
 </html>
