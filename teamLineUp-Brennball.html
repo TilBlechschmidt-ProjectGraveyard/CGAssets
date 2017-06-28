@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Score counter</title>
+    <link rel="stylesheet" href="main.css"/>
+    <link rel="stylesheet" href="shapes.css"/>
+    <link rel="stylesheet" href="header.css"/>
+    <link rel="stylesheet" href="lineup.css"/>
+</head>
+<body class="" onload="showTitle()">
+    <!--<div class="button-panel">-->
+        <!--<button onclick="play()">show</button>-->
+        <!--<button onclick="invoke()">invoke</button>-->
+        <!--<button onclick="his()">hide</button>-->
+        <!--<div id="current-state"></div>-->
+    <!--</div>-->
+
+    <div class="container hcenter-contents header">
+        <div class="trapezoid left"></div>
+        <div class="header-title">Brennball</div>
+        <div class="trapezoid right"></div>
+    </div>
+
+
+    <div class="container hcenter-contents vcenter-contents lineup-teams-container">
+        <div class="lineup-wrapper">
+            <center>
+                <div class="lineup-title">
+                    <div class="lineup-title-text">OHG</div>
+                </div>
+            </center>
+            <div class="lineup">
+                <table style="width:100%; text-align: center" id="team1-table">
+                    <tr>
+                        <td>1</td>
+                        <td>Hollwege, Jan Niklas</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <img class="lineup-vs" src="img/Versus_sign-250x200.png" />
+        <div class="lineup-wrapper">
+            <center>
+                <div class="lineup-title">
+                    <div class="lineup-title-text">ABIs</div>
+                </div>
+            </center>
+            <div class="lineup">
+                <table style="width:100%; text-align: center" id="team2-table">
+                    <tr>
+                        <td>1</td>
+                        <td>Hollwege, Jan Niklas</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Schnorrbusch, Lukas</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTitle() {
+            document.body.className = "header-shown";
+            updateRows("team1-table", "");
+            updateRows("team2-table", "");
+        }
+
+        function showTable() {
+            document.body.className = "shown header-shown";
+
+            setTimeout(function () {
+                updateRows("team1-table", "shown");
+                updateRows("team2-table", "shown");
+            }, 900);
+        }
+
+        function hide() {
+            if (document.body.className.indexOf("shown") === 0) {
+                document.body.className = "hidden header-hidden";
+            } else {
+                document.body.className = "header-hidden";
+            }
+            updateRows("team1-table", "");
+            updateRows("team2-table", "");
+        }
+
+        function updateRows(id, newProp) {
+            var table = document.getElementById(id);
+            var timeout = 0;
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                timeout += 75;
+                setTimeout(function (c) {
+                    c.className = newProp;
+                }, timeout, row);
+            }
+        }
+
+//        window.play = play;
+//        window.invoke = invoke;
+//        window.next = next;
+//        window.update = function (a) { if (a === "invoke") invoke(); };
+    </script>
+
+    <script src="websocket.js"></script>
+</body>
+</html>

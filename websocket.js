@@ -2,8 +2,9 @@ var hidden = false;
 
 var variables = {
     startTime: 0,
-    pauseTime: 0
-}
+    pauseTime: 0,
+    lineupType: "Test"
+};
 
 
 var isController = window.location.pathname.indexOf("control.html") > 0
@@ -36,7 +37,7 @@ ws.onmessage = function (data) {
                 hidden = data.name === "hide";
             }
         } else if (data.type === "var") {
-            variables[data.name] = data.value
+            variables[data.name] = data.value;
 
             if (data.name === "score1") {
                 document.getElementById("counter").setAttribute("data-team1", data.value)
