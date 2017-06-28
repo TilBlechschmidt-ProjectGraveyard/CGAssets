@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="header.css"/>
     <link rel="stylesheet" href="lineup.css"/>
 </head>
-<body class="shown header-shown">
-    <div class="button-panel">
-        <button onclick="play()">show</button>
-        <button onclick="invoke()">invoke</button>
-        <button onclick="next()">hide</button>
-        <div id="current-state"></div>
-    </div>
+<body class="" onload="showTitle()">
+    <!--<div class="button-panel">-->
+        <!--<button onclick="play()">show</button>-->
+        <!--<button onclick="invoke()">invoke</button>-->
+        <!--<button onclick="his()">hide</button>-->
+        <!--<div id="current-state"></div>-->
+    <!--</div>-->
 
     <div class="container hcenter-contents header">
         <div class="trapezoid left"></div>
@@ -138,11 +138,11 @@
     </div>
 
     <script>
-        function play() {
+        function showTitle() {
             document.body.className = "header-shown";
         }
 
-        function invoke() {
+        function showTable() {
             document.body.className = "shown header-shown";
 
             setTimeout(function () {
@@ -151,7 +151,7 @@
             }, 900);
         }
 
-        function next() {
+        function hide() {
             document.body.className = "hidden header-hidden";
             updateRows("team1-table", "");
             updateRows("team2-table", "");
