@@ -13,7 +13,8 @@ wss.broadcast = function broadcast(data) {
 
 var variables = {
     score1: 0,
-    score2: 0
+    score2: 0,
+    startTime: 0
 };
 
 wss.on('connection', function connection(ws) {
@@ -21,8 +22,6 @@ wss.on('connection', function connection(ws) {
     for (var key in variables) {
         ws.send(JSON.stringify({ type: "var", name: key, value: variables[key] }))
     }
-
-
 
     ws.on('message', function incoming(data) {
         console.log(data);
@@ -38,6 +37,9 @@ wss.on('connection', function connection(ws) {
                 variables[name]++;
             } else if (pdata.opp === "dec") {
                 variables[name]--;
+            } else if (pdata.opp === "set") {
+                console.log(pdata);
+                variables[name] = pdata.value;
             }
 
             message = JSON.stringify({ type: "var", name: name, value: variables[name] })

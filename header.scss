@@ -86,7 +86,7 @@ body.header-shown div.header div.header-title {
     @include header-title-hidden-props;
     animation: header-title-fade-in;
     animation-duration: $headerTextAnimationDuration;
-    animation-delay: $headerTrapezoidAnimationDuration + 100ms;
+    //animation-delay: $headerTrapezoidAnimationDuration + 100ms;
     animation-fill-mode: forwards;
 }
 

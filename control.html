@@ -19,6 +19,14 @@
         <br>
         <button onclick="dec('score1')">Decrease 1</button>
         <button onclick="dec('score2')">Decrease 2</button>
+
+        <br>
+        <br>
+
+        <button onclick="set('startTime', Date.now())">Reset timer</button>
+
+        <br>
+        <button onclick="func('hide')">Hide</button>
     </div>
     <div>
         <h1>Lineup</h1>
@@ -89,6 +97,10 @@
 
         function dec(varname) {
             send({ type: "var", "opp": "dec", name: varname})
+        }
+
+        function set(varname, value) {
+            send({ type: "var", "opp": "set", name: varname, value: value})
         }
     </script>
 </body>

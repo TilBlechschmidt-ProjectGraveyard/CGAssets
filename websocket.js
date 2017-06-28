@@ -29,6 +29,8 @@ ws.onmessage = function (data) {
                 document.getElementById("counter").setAttribute("data-team1", data.value)
             } else if (data.name === "score2") {
                 document.getElementById("counter").setAttribute("data-team2", data.value)
+            } else if (data.name === "startTime") {
+                window["startTime"] = data.value;
             }
         }
     }

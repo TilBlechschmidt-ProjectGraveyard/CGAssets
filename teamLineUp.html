@@ -152,7 +152,11 @@
         }
 
         function hide() {
-            document.body.className = "hidden header-hidden";
+            if (document.body.className.indexOf("shown") === 0) {
+                document.body.className = "hidden header-hidden";
+            } else {
+                document.body.className = "header-hidden";
+            }
             updateRows("team1-table", "");
             updateRows("team2-table", "");
         }
