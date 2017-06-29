@@ -15,7 +15,13 @@ var variables = {
     score1: 0,
     score2: 0,
     startTime: 0,
-    pauseTime: 0
+    pauseTime: 0,
+    ge_ohg: 0,
+    ge_abi: 0,
+    vo_ohg: 0,
+    vo_abi: 0,
+    fu_ohg: 0,
+    fu_abi: 0
 };
 
 wss.on('connection', function connection(ws) {
@@ -61,7 +67,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', function (req, res) {
-    res.send('Hello World!');
+    res.send('<a href="/control.html">Controller</a><br><a href="/scoreCounter.html">Score Counter</a>');
 });
 
 app.use(express.static('.'));
